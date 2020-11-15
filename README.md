@@ -37,7 +37,7 @@ Counter(y_resampled)
 
 Then, our model is generated using the LogisticRegresssion function. We find the model to have a balanced accuracry score of  0.64946 and the following confusion matrix and imbalanced classification report:
 
-LINK NAIVE RANDOM SCREENIE
+![NaiveRandom](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/NaiveRandom.png)
 
 
 #### 2c. SMOTE Oversampling
@@ -51,7 +51,7 @@ Counter(y_resampled)
 
 Then, our model is generated using the LogisticRegresssion function. We find the model to have a balanced accuracry score of  0.65844 and the following confusion matrix and imbalanced classification report:
 
-LINK SMOTE IMAGES SCREENIE
+![SMOTE](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/SMOTE.png)
 
 #### 3. Undersampling
 
@@ -62,6 +62,9 @@ X_resampled, y_resampled = cc.fit_resample(X_train, y_train)
 Counter(y_resampled)
 ```
 We find the undersampling method to have a balanced accuracry score of 0.54744 and the following confusion matrix and imbalanced classification report:
+
+![ClusterCentroid](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/ClusterCentroid.png)
+
 #### 4. Combination
 In combination, you guessed it, we use both over and undersamppling to balance the learning model. This is completed using the SMOTEENN algorithm.
 ```
@@ -72,5 +75,5 @@ Counter(y_resampled)
 
 This yields an accuracy score of 0.64892 and the following confusion matrix and imbalanced classification report:
 
-LINK SMOTEENN IMAGE HERE
+![Combination](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/Combination.png)
 
