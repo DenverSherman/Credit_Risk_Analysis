@@ -1,11 +1,11 @@
 # Credit_Risk_Analysis
-Machine Learning and Predicting Credit Risk\\
+Machine Learning and Predicting Credit Risk
 
-### 0. Project Overview
+### 1. Project Overview
 
-We are tasked with assessing the accuracy and useability of machine learning methods to predict credit risk. In this project, we will use various shallow learning methods and later compare for accuracy. In the first section, we will using resampling models. 
+We are tasked with assessing the accuracy and useability of machine learning methods to predict credit risk. In this project, we will use various shallow learning methods and later compare for accuracy. In the first section, we will using resampling models. In the next section, we wrap up using ensemble methods like RandomForest and EasyEnsemble. Lastly, results are summarized and a 'winner' is announced. Comments are given on the actionability of the results. 
 
-### 1. Resampling Models - Data Cleaning
+### 2. Resampling Models - Data Cleaning
 
  As a requirement for utilize the scikitlearn libraries, our data need to be strictly numerical. This is treated in this section by using the pandas .get_dummies() function to make unique, dichotomous columns for each unique string in non-numerical fields.
 
@@ -65,7 +65,7 @@ We find the undersampling method to have a balanced accuracry score of 0.54744 a
 
 ![ClusterCentroid](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/ClusterCentroid.png)
 
-#### 4. Combination
+#### 4. Combination Resampling
 In combination, you guessed it, we use both over and undersamppling to balance the learning model. This is completed using the SMOTEENN algorithm.
 ```
 sm = SMOTEENN(random_state=1)
@@ -77,3 +77,35 @@ This yields an accuracy score of 0.64892 and the following confusion matrix and 
 
 ![Combination](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/Combination.png)
 
+#### 5. Ensemble Algorithms
+
+Branching away from resampling, we explore the use of RandomForest and EasyEnsemble in the following two sections. As always, the dataset needs to be prepped before use in our machine learning environment. For this, we use the pandas .get_dummies method. This step was executed in section 1 and is repeated here for a new jupyter notebook.
+
+#### 5a. RandomForestClassifier
+
+Starting with a RandomForest algorithm, our training set is fit and prediction y-values generated.
+```
+rf_model = BalancedRandomForestClassifier(n_estimators=100, random_state=1)
+rf_model = rf_model.fit(X_train, y_train)
+y_pred = rf_model.predict(X_test)
+```
+We find the Random Forest Model to have a balanced accuracry score of 0.78855 and the following confusion matrix and imbalanced classification report:
+
+![BRF](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/BRF.png)
+
+#### 5b. Easy Ensemble AdaBoost Classifier
+
+Our last ensemble method will be the EasyEnsemble AdaBoost Classifer Algorithm.
+```
+eec = EasyEnsembleClassifier(random_state=1)
+eec.fit(X_train, y_train)
+y_pred = eec.predict(X_test)
+
+```
+We find the EasyEnsemble to have the highest balanced accuracry score of 0.91548 and the following confusion matrix and imbalanced classification report:
+
+![EEC](https://github.com/DenverSherman/Credit_Risk_Analysis/blob/main/images/EEC.png)
+
+#### 6. Summary of Results
+
+In summary, our highest observed balanced accuracy score belongs to the EasyEnsemble algorithm at 0.91548. Moving forward, this model seems balanced. Reviewing the randomForest classifier feature breakout, we see that loan principle, or the initial amount lent, is one of the most important features in determining risk. Random Forest doesn't produce a high accuracy score, however the outputs of the results shed light on where a regression model might be most powerful. Printing out the most important features, even if it isn't the strongest predictor, is valuable in progressing and directing our analysis as we move forward.
